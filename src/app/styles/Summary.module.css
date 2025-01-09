@@ -1,0 +1,38 @@
+.summaryContainer {
+  padding: 50px;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+.summaryContainer h2 {
+  color:#333;
+  align-items: center;
+  text-align: center;
+  
+}
+
+.summaryItem {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.summaryItem h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.summaryItem ul {
+  list-style: none;
+  padding: 0;
+}
+
+.summaryItem ul li {
+  padding: 5px 0;
+}
+
+.total {
+  font-weight: bold;
+  color: #333;
+}
