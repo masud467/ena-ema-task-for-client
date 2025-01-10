@@ -3,16 +3,18 @@ import axios from "axios";
 
 export const addExpense = createAsyncThunk(
   "expense/addExpense",
-  async (expenseData,{rejectWithValue})=>{
+  async (expenseData, { rejectWithValue }) => {
     try {
-      const response=await axios.post("http://localhost:3001/expenses", expenseData);
+      const response = await axios.post(
+        "https://ena-ema-task-for-server.vercel.app/expenses",
+        expenseData
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
 );
-
 
 const initialState = {
   expenses: [],

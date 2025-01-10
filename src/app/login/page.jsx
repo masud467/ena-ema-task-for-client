@@ -5,12 +5,14 @@ import axios from "axios";
 import styles from "../styles/login.module.css";
 import { useRouter } from "next/navigation";
 
-
 const LoginPage = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [message, setMessage] = useState("");
-  const router= useRouter()
-  
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,29 +22,29 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/login", formData);
+      const response = await axios.post(
+        "https://ena-ema-task-for-server.vercel.app/login",
+        formData
+      );
       setMessage(response.data.message);
-      setTimeout(()=>{
+      setTimeout(() => {
         setMessage("");
-        router.push("/")
-      },200)
-      setFormData({name: "", email: "", password: ""});
-      
+        router.push("/");
+      }, 200);
+      setFormData({ name: "", email: "", password: "" });
     } catch (error) {
       console.error("Login error:", error);
       setMessage("An error occurred. Please try again.");
-      setTimeout(()=>{
+      setTimeout(() => {
         setMessage("");
-        
-      },2000)
+      }, 2000);
     }
-    
   };
 
   return (
     <div className={styles.container}>
-        {message && (
-        <div className=''>
+      {message && (
+        <div className="">
           <p>{message}</p>
         </div>
       )}
@@ -83,7 +85,6 @@ const LoginPage = () => {
           Login
         </button>
       </form>
-      
     </div>
   );
 };
