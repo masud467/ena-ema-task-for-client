@@ -2,6 +2,7 @@
   padding: 50px;
   background: #f4f4f4;
   min-height: 100vh;
+  
 }
 .summaryContainer h2 {
   color:#333;
@@ -16,6 +17,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  width: 300px;
 }
 
 .summaryItem h3 {

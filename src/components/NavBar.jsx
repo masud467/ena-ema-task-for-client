@@ -1,6 +1,8 @@
+
 import styles from "../app/styles/NabVar.module.css";
 
 const NavBar = () => {
+  
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -8,7 +10,9 @@ const NavBar = () => {
         <nav className={styles.nav}>
           <a href="/">Home</a>
           <a href="/summary">Summary</a>
+          <a href="/login">Login</a>
         </nav>
+        
       </header>
     </div>
   );
