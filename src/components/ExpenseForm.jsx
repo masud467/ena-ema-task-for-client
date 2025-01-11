@@ -1,57 +1,63 @@
-"use client"
-import { useDispatch, useSelector } from 'react-redux';
-import styles from '../app/styles/ExpenseForm.module.css';
-import { addExpense } from '@/lib/features/expenses/expensesSlice';
-// import { useState } from 'react';
+"use client";
+import { useDispatch } from "react-redux";
+import styles from "../app/styles/ExpenseForm.module.css";
+import { addExpense } from "@/lib/features/expenses/expensesSlice";
+import { useState } from "react";
 
 const ExpenseForm = () => {
- const dispatch= useDispatch();
-//  const {error,loading}= useSelector(state=>state.expense);
-//  const [alertMessage, setAlertMessage] = useState("");
-//   const [alertType, setAlertType] = useState("");
+  const dispatch = useDispatch();
+  const [alert, setAlert] = useState({ type: "", message: "" });
 
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const expenseData = {
       category: formData.get("category"),
       purpose: formData.get("purpose"),
       amount: parseFloat(formData.get("amount")),
+      userId: formData.get("userId"),
       date: new Date().toLocaleString(),
-    } 
-    
-    dispatch(addExpense(expenseData))
-    // .unwrap()
-    //   .then((response) => {
-    //     setAlertMessage("Expense added successfully!");
-    //     setAlertType("success");
-    //   })
-    //   .catch((err) => {
-    //     setAlertMessage(err.message || "Spending limit exceeded!");
-    //     setAlertType("error");
-    //   });
+    };
 
-      // setTimeout(() => {
-      //   setAlertMessage("");
-      //   setAlertType("");
-      // }, 2000);
-    console.log(expenseData);
-  }
-  
+    try {
+      // Simulate a backend call (Replace this with the actual Redux action call)
+      const response = await dispatch(addExpense(expenseData)).unwrap();
+
+      if (response?.message) {
+        setAlert({ type: "success", message: response.message });
+      } else {
+        throw new Error("Something went wrong.");
+      }
+    } catch (error) {
+      setAlert({
+        type: "error",
+        message:
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to add expense.",
+      });
+    }
+
+    event.target.reset();
+  };
+  const closeAlert = () => setAlert({ type: "", message: "" });
   return (
     <div className={styles.formContainer}>
-      {/* {alertMessage && (
-        <div
-          className={`${styles.alert} ${
-            alertType === "success" ? styles.success : styles.error
-          }`}
-        >
-          {alertMessage}
-        </div>
-      )} */}
       <form className={styles.expenseForm} onSubmit={handleSubmit}>
         <h2>Add Expense</h2>
+        {/* Alert Box  */}
+        {alert.message && (
+          <div
+            className={`${styles.alert} ${
+              alert.type === "success" ? styles.success : styles.error
+            }`}
+          >
+            <span>{alert.message}</span>
+            <button onClick={closeAlert} className={styles.closeButton}>
+              &times;
+            </button>
+          </div>
+        )}
         <label htmlFor="category">Category:</label>
         <select id="category" name="category" className={styles.input}>
           <option>Groceries</option>
@@ -81,12 +87,23 @@ const ExpenseForm = () => {
           placeholder="E.g., 50"
           required
         />
-
-        <button type="submit" className={styles.button} >
-      Add Expense
+        <label htmlFor="userId">User ID</label>
+        <input
+          type="text"
+          id="userId"
+          name="userId"
+          className={styles.input}
+          placeholder="Your User ID"
+          required
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, ""); // Allow only letters and spaces
+          }}
+          title="User ID can only contain letters."
+        />
+        <button type="submit" className={styles.button}>
+          Add Expense
         </button>
       </form>
-      
     </div>
   );
 };

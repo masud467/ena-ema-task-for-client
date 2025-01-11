@@ -6,7 +6,7 @@ export const addExpense = createAsyncThunk(
   async (expenseData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://ena-ema-task-for-server.vercel.app/expenses",
+        "http://localhost:3001/expenses",
         expenseData
       );
       return response.data;
@@ -31,7 +31,7 @@ const expenseSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addExpense.fulfilled, (state) => {
+      .addCase(addExpense.fulfilled, (state,action) => {
         state.loading = false;
         state.expenses.push(action.payload);
       })

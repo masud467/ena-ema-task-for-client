@@ -6,7 +6,7 @@ export const postSpendingLimit = createAsyncThunk(
   async (spendingLimitData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://ena-ema-task-for-server.vercel.app/spendingLimit",
+        "http://localhost:3001/spendingLimit",
         spendingLimitData
       );
       return response.data;
