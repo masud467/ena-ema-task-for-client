@@ -31,10 +31,7 @@ const ExpenseForm = () => {
     } catch (error) {
       setAlert({
         type: "error",
-        message:
-          error.response?.data?.message ||
-          error.message ||
-          "Failed to add expense.",
+        message: `Failed to add expense. Details: ${error.response?.data?.message || error.message || "Unknown error"}`,
       });
     }
 
