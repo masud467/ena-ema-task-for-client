@@ -19,6 +19,14 @@ const ExpenseForm = () => {
       date: new Date().toLocaleString(),
     };
 
+    if (!expenseData.category || !expenseData.purpose || !expenseData.amount || !expenseData.userId) {
+      setAlert({
+        type: "error",
+        message: "Failed to add expense. Details: All fields are required"
+      });
+      return;
+    }
+
     try {
       // Simulate a backend call (Replace this with the actual Redux action call)
       const response = await dispatch(addExpense(expenseData)).unwrap();
@@ -29,9 +37,19 @@ const ExpenseForm = () => {
         throw new Error("Something went wrong.");
       }
     } catch (error) {
+      console.log('Error details:', {
+        error,
+        status: error?.response?.status,
+        data: error?.response?.data,
+        message: error?.message
+      });
       setAlert({
         type: "error",
-        message: `Failed to add expense. Details: ${error.response?.data?.message || error.message || "Unknown error"}`,
+        message: `Failed to add expense. Details: ${
+          error.response?.data?.message || 
+          error.message || 
+          "Server connection error - please try again"
+        }`,
       });
     }
 
