@@ -14,7 +14,7 @@ const ExpenseForm = () => {
     const expenseData = {
       category: formData.get("category"),
       purpose: formData.get("purpose"),
-      amount: parseFloat(formData.get("amount")),
+      amount: formData.get("amount"),
       userId: formData.get("userId"),
       date: new Date().toLocaleString(),
     };
