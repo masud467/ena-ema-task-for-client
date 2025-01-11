@@ -29,5 +29,6 @@ const summarySlice = createSlice({
   },
 });
 
-export const {groupedExpenses, totalExpense,status,error} = summarySlice.actions;
+export const { groupedExpenses, totalExpense, status, error } =
+  summarySlice.actions;
 export default summarySlice.reducer;
