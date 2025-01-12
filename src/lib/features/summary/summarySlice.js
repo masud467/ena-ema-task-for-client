@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchSummaryData } from "./summaryApi";
 
+const initialState={
+  groupedSummary: {},
+  totalExpense: 0,
+  date: "",
+  status: "idle",
+  error: null
+}
+
 const summarySlice = createSlice({
   name: "summary",
-  initialState: {
-    groupedSummary: {},
-    totalExpense: 0,
-    date: "",
-    status: "idle", // loading status
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
