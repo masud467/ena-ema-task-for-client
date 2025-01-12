@@ -29,7 +29,7 @@ const ExpenseForm = () => {
 
     try {
       // Simulate a backend call (Replace this with the actual Redux action call)
-      const response = await dispatch(addExpense(expenseData)).unwrap();
+      const response = await dispatch(addExpense(expenseData));
 
       if (response?.message) {
         setAlert({ type: "success", message: response.message });
