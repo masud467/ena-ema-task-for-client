@@ -1,6 +1,7 @@
 .summaryContainer {
-  margin: 20px;
-  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .title {
@@ -12,6 +13,12 @@
 .summaryTable {
   width: 100%;
   border-collapse: collapse;
+  overflow-x: auto;
+  display: block; /* Allow horizontal scrolling on smaller screens */
+}
+
+.summaryTable thead {
+  background-color: #f4f4f4;
 }
 
 .summaryTable th,
@@ -19,13 +26,76 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+  font-size: 14px;
 }
 
 .summaryTable th {
-  background-color: #f4f4f4;
   font-weight: bold;
+  background-color: #eaeaea;
 }
 
-.summaryTable tr:hover {
+.summaryTable td {
+  word-break: break-word; /* Handle long text gracefully */
+}
+
+.summaryTable tr:nth-child(even) {
   background-color: #f9f9f9;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .summaryTable td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .summaryTable th {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .summaryTable th,
+  .summaryTable td {
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  /* Adjust the table layout for small screens */
+  .summaryTable {
+    font-size: 12px;
+    border: 0;
+    display: block;
+  }
+
+  .summaryTable thead {
+    display: none; /* Hide table headers */
+  }
+
+  .summaryTable tr {
+    display: block;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .summaryTable td {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .summaryTable td::before {
+    content: attr(data-label); /* Add labels for table cells */
+    flex: 1;
+    font-weight: bold;
+  }
 }

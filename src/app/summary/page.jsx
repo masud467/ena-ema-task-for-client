@@ -110,18 +110,30 @@ const SummaryPage = ({ userId, month }) => {
           </tr>
         </thead>
         <tbody>
-          {fullMonthDates.map((date) => (
-            <tr key={date}>
-              <td>{date}</td>
-              <td>{groupedMonthlyExpenses[date]?.Groceries ||" X"}</td>
-              <td>{groupedMonthlyExpenses[date]?.Transportation || "X"}</td>
-              <td>{groupedMonthlyExpenses[date]?.Utilities || "X"}</td>
-              <td>{groupedMonthlyExpenses[date]?.Healthcare || "X"}</td>
-              <td>{groupedMonthlyExpenses[date]?.Charity || "X"}</td>
-              <td>{groupedMonthlyExpenses[date]?.Miscellaneous || "X"}</td>
-            </tr>
-          ))}
-        </tbody>
+  {fullMonthDates.map((date) => (
+    <tr key={date}>
+      <td data-label="Date">{date}</td>
+      <td data-label="HealthCare">
+        {groupedMonthlyExpenses[date]?.HealthCare || "X"}
+      </td>
+      <td data-label="Utility">
+        {groupedMonthlyExpenses[date]?.Utility || "X"}
+      </td>
+      <td data-label="Transportation">
+        {groupedMonthlyExpenses[date]?.Transportation || "X"}
+      </td>
+      <td data-label="Miscellaneous">
+        {groupedMonthlyExpenses[date]?.Miscellaneous || "X"}
+      </td>
+      <td data-label="Miscellaneous">
+        {groupedMonthlyExpenses[date]?.Miscellaneous || "X"}
+      </td>
+      <td data-label="Miscellaneous">
+        {groupedMonthlyExpenses[date]?.Miscellaneous || "X"}
+      </td>
+    </tr>
+  ))}
+</tbody>
       </table>
     </div>
   );
