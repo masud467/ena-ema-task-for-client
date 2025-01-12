@@ -6,7 +6,7 @@ export const fetchSummaryData = createAsyncThunk(
   async ({ userId, date }) => {
     try {
       const response = await axios.get(
-        `https://ena-ema-task-for-server.vercel.app/expenses/${userId}/${date}`
+        `https://ena-ema-task-for-server.vercel.app/expenses/${userId}`
       );
       return response.data;
     } catch (error) {
