@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSummaryData } from "./summaryApi";
+import { fetchMonthlySummaryData } from "./summaryApi";
 
 const initialState={
   groupedSummary: {},
@@ -15,16 +15,16 @@ const summarySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchSummaryData.pending, (state) => {
+      .addCase(fetchMonthlySummaryData.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchSummaryData.fulfilled, (state, action) => {
+      .addCase(fetchMonthlySummaryData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.groupedExpenses = action.payload.expenses || {};
         state.totalExpense = action.payload.totalExpense || 0;
         state.date = action.payload.date || "";
       })
-      .addCase(fetchSummaryData.rejected, (state, action) => {
+      .addCase(fetchMonthlySummaryData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
