@@ -7,7 +7,11 @@ export const addExpense = createAsyncThunk(
     try {
       const response = await axios.post(
         "https://ena-ema-task-for-server.vercel.app/expenses",
-        expenseData
+        expenseData,{
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       return response.data;
     } catch (error) {
